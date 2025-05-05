@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <audio autoplay loop hidden>
+    <audio id="bg-music" loop>
         <source src="audio/music.mp3" type="audio/mpeg">
         Tvoj browser ne podržava audio element.
     </audio>
@@ -19,5 +19,14 @@
             Tvoj browser ne podržava video tag.
         </video>
     </div>
+    <script>
+        // Pusti muziku na prvu interakciju (klik bilo gde)
+        const music = document.getElementById('bg-music');
+        const playMusicOnce = () => {
+            music.play().catch(e => console.log("Autoplay blocked"));
+            document.removeEventListener('click', playMusicOnce);
+        };
+        document.addEventListener('click', playMusicOnce);
+    </script>
 </body>
 </html>
